@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<br>
+<br>
+<br>
+<br>
+    
+
+<div class="section sec-testimonials bg-light">
+    <div class="container">
+        <div class="row mb-5 align-items-center">
+            <div class="col-md-6">
+                <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0">Realtors Team</h2>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <div id="testimonial-nav">
+                    <span class="prev" data-controls="prev">Prev</span>
+
+                    <span class="next" data-controls="next">Next</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+
+            </div>
+        </div>
+        <div class="testimonial-slider-wrap">
+            <div class="testimonial-slider">
+                {% if realtors %}
+                {% for realtor in realtors %}
+
+
+                <div class="item">
+                    <div class="testimonial">
+                        <!-- <img src="{{ realtor.photo.url }}" alt="Image" class="img-fluid rounded-circle w-50 h-100 mb-4"> -->
+                        <div style="width: 200px; height: 200px; overflow: hidden; border-radius: 50%;">
+                            <img src="{{ realtor.photo.url }}" alt="Image"
+                                style="width: 100%; height: 100%; object-fit: cover;" />
+                        </div>
+
+                        <h3 class="h5 text-primary">{{ realtor.name }}</h3>
+                        <p class="text-black-50">{{ realtor.description }}</p>
+
+                        <p></p>
+
+                        <ul class="social list-unstyled list-inline dark-hover">
+                            <li class="list-inline-item"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="list-inline-item"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="list-inline-item"><a href="#"><span class="icon-linkedin"></span></a></li>
+                            <li class="list-inline-item"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,119 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+
+
+
+{% block content %}
+
+
+<div class="hero page-inner overlay" style="background-image: url('/static/images/hero_bg_1.jpg');">
+
+	<div class="container">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-lg-9 text-center mt-5">
+				<h1 class="heading" data-aos="fade-up">Matched Properties</h1>
+
+				<nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+					<ol class="breadcrumb text-center justify-content-center bg-transparent">
+						<li class="breadcrumb-item "><a href="{% url 'home' %}">Home</a></li>
+						<li class="breadcrumb-item active text-white-50" aria-current="page">Search</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="section section-properties">
+	<div class="">
+		<div class="row col-10 mx-auto">
+			{% if listings %}
+			{% for listing in listings %}
+			<div class="col-md-4 mb-4 card shadow-lg">
+				<div class="property-item mb-30">
+
+					<a href="{% url 'property_single' listing.id %}" class="img">
+						<img src="{{ listing.photo_main.url }}" alt="Image" class="img-fluid">
+					</a>
+
+					<div class="property-content">
+						<div class="price mb-2"><span>${{ listing.price }}</span></div>
+						<div>
+							<span class="city d-block mb-3">{{ listing.title }}</span>
+							<span class="d-block mb-2 text-black-50"> {{ listing.city }} {{ listing.state }}, {{
+								listing.zipcode1 }}</span>
+
+							<!-- <div class="specs d-flex mb-4">
+									<span class="d-block d-flex align-items-center me-3">
+										<span class="icon-bed me-2"></span>
+										<span class="caption">2 beds</span>
+									</span>
+									<span class="d-block d-flex align-items-center">
+										<span class="icon-bath me-2"></span>
+										<span class="caption">2 baths</span>
+									</span>
+								</div> -->
+							<div class="row py-2 text-secondary">
+								<div class="col-6">
+									<i class="fas fa-th-large"></i> Sqft: {{ listing.sqft }}
+								</div>
+								<div class="col-6">
+									<i class="fas fa-car"></i> Garage: {{ listing.garage }}
+								</div>
+							</div>
+							<div class="row py-2 text-secondary">
+								<div class="col-6">
+									<i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}
+								</div>
+								<div class="col-6">
+									<i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}
+								</div>
+							</div>
+							<hr>
+							<div class="row py-2 text-secondary">
+								<div class="col-12">
+									<i class="fas fa-user"></i> {{ listing.realtor }}
+								</div>
+							</div>
+							<div class="row text-secondary pb-2">
+								<div class="col-6">
+									<i class="fas fa-clock"></i> {{ listing.list_date | timesince }}
+								</div>
+							</div>
+							<!-- <a href="" class="btn btn-primary btn-block">More Info</a> -->
+							<a href="{% url 'property_single' listing.id %}" class="btn btn-primary py-2 px-3">See
+								details</a>
+						</div>
+					</div>
+				</div> <!-- .item -->
+			</div>
+			{% endfor %}
+			{% else %}
+			<div class="col-md-12">
+				<p>No Listings Available</p>
+			</div>
+			{% endif %}
+			<!-- </div> -->
+		</div>
+
+		<div class="row align-items-center py-5">
+			<div class="col-lg-3">
+				Pagination (1 of 10)
+			</div>
+			<div class="col-lg-6 text-center">
+				<div class="custom-pagination">
+					<a href="#">1</a>
+					<a href="#" class="active">2</a>
+					<a href="#">3</a>
+					<a href="#">4</a>
+					<a href="#">5</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

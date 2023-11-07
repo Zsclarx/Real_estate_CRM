@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+	<div class="site-mobile-menu site-navbar-target">
+		<div class="site-mobile-menu-header">
+			<div class="site-mobile-menu-close">
+				<span class="icofont-close js-menu-toggle"></span>
+			</div>
+		</div>
+		<div class="site-mobile-menu-body"></div>
+	</div>
+
+
+	<div class="hero page-inner overlay" style="background-image: url('{{ listing.photo_main.url }}');">
+		<div class="container">
+			<div class="row justify-content-center align-items-center">
+				<div class="col-lg-9 text-center mt-5">
+					<h1 class="heading" data-aos="fade-up">{{ listing.title }}</h1>
+
+					<nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+						<!-- <ol class="breadcrumb text-center justify-content-center">
+							<li class="breadcrumb-item "><a href="index.html">Home</a></li>
+							<li class="breadcrumb-item "><a href="properties.html">Properties</a></li>
+							<li class="breadcrumb-item active text-white-50" aria-current="page">{{ listing.title }}</li>
+						</ol> -->
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="section">
+		<div class="container">
+			<div class="row justify-content-between">
+				<div class="col-lg-7">
+					<div class="img-property-slide-wrap">
+						<div class="img-property-slide">
+							{% if listing.photo_1 %}
+								<img src="{{ listing.photo_1.url }}" alt="Image" class="img-fluid">
+							{% endif %}
+							{% if listing.photo_2 %}
+								<img src="{{ listing.photo_2.url }}" alt="Image" class="img-fluid">
+							{% endif %}
+							{% if listing.photo_3 %}
+								<img src="{{ listing.photo_3.url }}" alt="Image" class="img-fluid">
+							{% endif %}
+							{% if listing.photo_4 %}
+								<img src="{{ listing.photo_4.url }}" alt="Image" class="img-fluid">
+							{% endif %}
+							{% if listing.photo_5 %}
+								<img src="{{ listing.photo_5.url }}" alt="Image" class="img-fluid">
+							{% endif %}
+							{% if listing.photo_6 %}
+								<img src="{{ listing.photo_6.url }}" alt="Image" class="img-fluid">
+							{% endif %}
+							
+          				</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<h2 class="heading text-primary">{{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}</h2>
+					<p class="meta">Price: ${{ listing.price }}, Bedrooms: {{ listing.bedrooms }}, Garages: {{ listing.garage }}</p>
+					<p class="meta">Bathrooms: {{ listing.bathrooms }}, Sq.Feet: {{ listing.sqft }}, Lot Size: {{ listing.lot_size }} </p>
+					<p class="text-black-50">{{ listing.description }}</p>
+					
+					<div class="d-block agent-box p-5">
+						<div class="img mb-4">
+							<img src="{{ listing.realtor.photo.url }}" alt="Image" class="img-fluid">
+						</div>
+						<div class="text">
+							<h3 class="mb-0">{{ listing.realtor }}</h3>
+							<div class="meta mb-3">Property Realtor</div>
+							<p>{{ listing..description }}</p>
+							<ul class="list-unstyled social dark-hover d-flex">
+								<li class="me-1"><a href="#"><span class="icon-instagram"></span></a></li>
+								<li class="me-1"><a href="#"><span class="icon-twitter"></span></a></li>
+								<li class="me-1"><a href="#"><span class="icon-facebook"></span></a></li>
+								<li class="me-1"><a href="#"><span class="icon-linkedin"></span></a></li>
+
+							</ul>
+						</div>
+						<button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- Preloader -->
+    <!-- <div id="overlayer"></div>
+    <div class="loader">
+    	<div class="spinner-border" role="status">
+    		<span class="visually-hidden">Loading...</span>
+    	</div>
+    </div> -->
+
+
+	  <div class="modal fade" id="inquiryModal" tabindex="-1" role="dialog" aria-labelledby="inquiryModalLabel" aria-hidden="true" data-backdrop="false">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header" style="background-color: #007bff; color: #fff;">
+			  <h5 class="modal-title" id="inquiryModalLabel">Make An Inquiry</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+			  <form action="{% url 'contact' %}" method="POST">
+				{% csrf_token %}
+				{% if user.is_authenticated %}
+				  <input type="hidden" name="user_id" value="{{ user.id }}">
+				{% else %}
+				  <input type="hidden" name="user_id" value="0">
+				{% endif %}
+				<input type="hidden" name="realtor_email" value="{{ listing.realtor.email }}">
+				<input type="hidden" name="listing_id" value="{{ listing.id }}">
+				<div style="margin-bottom: 15px;" class="form-group">
+				  <label for="property_name" style="margin: 0;" class="col-form-label">Property:</label>
+				  <input type="text" name="listing" style="width: 100%; padding: 10px;" class="form-control" value="{{ listing.title }}">
+				</div>
+				<div style="margin-bottom: 15px;" class="form-group">
+				  <label for="name" style="margin: 0;" class="col-form-label">Name:</label>
+				  <input type="text" name="name" style="width: 100%; padding: 10px;" class="form-control" {% if user.is_authenticated %} value="{{ user.first_name }} {{ user.last_name }}" {% endif %} required>
+				</div>
+				<div style="margin-bottom: 15px;" class="form-group">
+				  <label for="email" style="margin: 0;" class="col-form-label">Email:</label>
+				  <input type="email" name="email" style="width: 100%; padding: 10px;" class="form-control" {% if user.is_authenticated %} value="{{ user.email }}" {% endif %} required>
+				</div>
+				<div style="margin-bottom: 15px;" class="form-group">
+				  <label for="phone" style="margin: 0;" class="col-form-label">Phone:</label>
+				  <input type="text" name="phone" style="width: 100%; padding: 10px;" class="form-control">
+				</div>
+				<div style="margin-bottom: 15px;" class="form-group">
+				  <label for="message" style="margin: 0;" class="col-form-label">Message:</label>
+				  <textarea name="message" style="width: 100%; padding: 10px;" class="form-control"></textarea>
+				</div>
+				<hr>
+				<input type="submit" value="Send" style="width: 100%; padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;" class="btn btn-block btn-secondary">
+			  </form>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  
+
+  {% endblock content %}

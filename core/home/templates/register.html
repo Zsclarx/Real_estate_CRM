@@ -1,0 +1,142 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="favicon.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap5" />
+
+  <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/tiny-slider1.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/aos1.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+  <title>Property &mdash; Free Bootstrap 5 Website Template by Untree.co</title>
+</head>
+
+<body>
+
+  <div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+      <div class="site-mobile-menu-close">
+        <span class="icofont-close js-menu-toggle"></span>
+      </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+  </div>
+
+  {% include 'partials/_alerts.html' %}
+
+  <nav class="site-nav">
+    <div class="container">
+      <div class="menu-bg-wrap">
+        <div class="site-navigation">
+          <a href="{% url 'listings' %}" class="logo m-0 float-start">Property</a>
+
+          <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
+            <li class="active"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+            <li class="has-children">
+              <a class="nav-link" href="{% url 'listings' %}">Properties</a>
+              <ul class="dropdown">
+                <li><a href="{% url 'listings' %}">Buy Property</a></li>
+                <li><a href="{% url 'listings' %}">Sell Property</a></li>
+                <li class="has-children">
+                  <a href="#">Dropdown</a>
+                  <ul class="dropdown">
+                    <li><a href="{% url 'listings' %}">Sub Menu One</a></li>
+                    <li><a href="{% url 'listings' %}">Sub Menu Two</a></li>
+                    <li><a href="{% url 'listings' %}">Sub Menu Three</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a class="nav-link" href="#">Services</a>
+            </li>
+            <li>
+              <a class="nav-link" href="{% url 'about' %}">About</a>
+            </li>
+            <li>
+              <a class="nav-link" href="{% url 'contactus' %}">Contact Us</a>
+            </li>
+            <li>
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li>
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+          </ul>
+
+          <a href="#"
+            class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none"
+            data-toggle="collapse" data-target="#main-navbar">
+            <span></span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+  <br>
+  <br>
+
+  <section id="register" class="bg-light py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h4>
+                <i class="fas fa-user-plus"></i> Register
+              </h4>
+            </div>
+            <div class="card-body">
+              <!-- Alerts -->
+              {% include 'partials/_alerts.html' %}
+              <form action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="first_name">First Name</label>
+                  <input type="text" name="first_name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="last_name">Last Name</label>
+                  <input type="text" name="last_name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="username">Username</label>
+                  <input type="text" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="password2">Password</label>
+                  <input type="password" name="password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="password">Confirm Password</label>
+                  <input type="password" name="password2" class="form-control" required>
+                </div>
+                <input type="submit" value="Register" class="btn btn-secondary btn-block">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <form action="{% url 'realtorregistration' %}" method="POST" enctype="multipart/form-data">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        {% csrf_token %}
+        <div class="formbold-form-title">
+            <h2 class=""><b> Register as Realtor </b></h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt.
+            </p>
+        </div>
+
+        <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <input type="text" class="form-control" name="name" placeholder="Your Name">
+                </div>
+                <div class="col-6 mb-3">
+                    <input type="email" class="form-control" name="email" placeholder="Your Email">
+                </div>
+                <div class="formbold-input-flex">
+                    <div>
+                        <label for="image" style="margin-right: 15px;" class="formbold-form-label"> Upload Image </label>
+                        <input type="file" class="btn btn-primary" name="photo" id="image" accept="image/*" />
+                    </div>
+                </div>
+                <div class="col-12 mb-3" style="margin-top: 10px;">
+                    <input type="text" name="phone" class="form-control" placeholder="Phone Number">
+                </div>
+                <div class="col-12 mb-3">
+                    <textarea name="description" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                </div>
+                <div class="formbold-checkbox-wrapper" style="margin-left: 10px;">
+                    <label for="supportCheckbox" class="formbold-checkbox-label">
+                        <div class="formbold-relative">
+                            <input type="checkbox" id="supportCheckbox" class="formbold-input-checkbox" name="is_mvp"
+                                value="True"> Is mvp
+                        </div>
+                        
+                    </label>
+                </div>
+
+                <div class="col-12">
+                    <input type="submit" value="Send Message" class="btn btn-primary">
+                </div>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+{% endblock content %}
